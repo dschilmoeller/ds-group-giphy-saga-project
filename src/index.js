@@ -20,7 +20,11 @@ function* getFavorites() {
     // HTTP call to server to return favorite DB results
     const newFavorites = yield axios.get("api/favorite");
     // Saga put to turn server response data over to favoriteList reducer
-    yield put({ type: "SET_FAVORITES", payload: newFavorites.data });
+    console.log("newFavorites:", newFavorites.data);
+    yield put({
+      type: "SET_FAVORITES",
+      payload: newFavorites.data,
+    });
   } catch (err) {
     // no errors please!
     console.error(err);
@@ -32,6 +36,7 @@ function* getFavorites() {
 const favoriteList = (state = [], action) => {
   switch (action.type) {
     case "SET_FAVORITES":
+      console.log("action.payload:", action.payload);
       return action.payload;
     default:
       return state;
