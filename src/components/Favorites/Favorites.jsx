@@ -16,9 +16,9 @@ function Favorites() {
         <h2>Favorited GIFs</h2>
         {/* .map favorites */}
 
-        <ul>{favoriteList.map((favGif) => {
+        <div className="favListContainer">{favoriteList.map((favGif) => {
             return <FavGif key={favGif.id} favGif={favGif} />
-        })}</ul>
+        })}</div>
     </div></>)
 }
 
