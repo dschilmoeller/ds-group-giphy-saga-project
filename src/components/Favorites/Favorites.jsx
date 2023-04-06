@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 // do we need to specifically import useEffect when it is already part of React which we have imported all of? 
 import { useDispatch, useSelector } from "react-redux";
+import FavGif from "../FavGif/FavGif";
 
 function Favorites() {
     const dispatch = useDispatch()
