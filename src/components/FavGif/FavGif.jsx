@@ -2,7 +2,7 @@ import React from "react"
 
 function FavGif(props) {
     return (<><li>
-        <img src={props.favGif.src} />
+        <iframe src={props.favGif.src} />
     </li>
     </>)
 }

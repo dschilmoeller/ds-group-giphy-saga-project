@@ -35,6 +35,7 @@ function* postFavorite(action) {
     console.log('in postFavorite action:', action.payload);
     try {
         yield axios.post('/api/search', action.payload)
+        yield put({type: 'GET_FAVORITES'})
     } catch (error) {
         console.log('error in postFavorite', error)
     }
@@ -43,7 +44,8 @@ function* postFavorite(action) {
 function* mainSaga() {
     // sagas go here
     yield takeEvery('SEARCH_IMAGES', getSearchResults);
-    yield takeEvery('POST_FAVORITE', postFavorite)
+    yield takeEvery('POST_FAVORITE', postFavorite);
+    yield takeEvery('GET_FAVORITES', getFavorites)
 }
 
 // SAGAS
@@ -81,6 +83,7 @@ const store = createStore(
     combineReducers({
         //reducers goes here
         searchReducer,
+        favoriteList,
     }),
     applyMiddleware(sagaMiddleware, logger)
 )

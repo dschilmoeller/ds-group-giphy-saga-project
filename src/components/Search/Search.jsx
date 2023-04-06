@@ -11,7 +11,7 @@ function Search() {
 
     function searchImages(event) {
         event.preventDefault()
-        console.log('inside searchImages');
+        //console.log('inside searchImages');
         dispatch({
             type: 'SEARCH_IMAGES',
             payload: searchString
@@ -19,8 +19,8 @@ function Search() {
     }
 
     function addFavorite (event) {
-        console.log('inside addFavorite function')
-        console.log('here is our favorite event', event.target.id)
+        //console.log('inside addFavorite function')
+        //console.log('here is our favorite event', event.target.id)
         let imageToFavorite = {src: results[event.target.id].embed_url}
         dispatch({
             type: 'POST_FAVORITE',
@@ -53,7 +53,7 @@ function Search() {
                 </div>
                 {console.log('results is:', results)}
                 {results.map((image, i) => {
-                    console.log('Here is our map', image)
+                    //console.log('Here is our map', image)
                     return (
                         <div key={i}>
                             <iframe src={image.embed_url} />
