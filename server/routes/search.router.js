@@ -16,5 +16,22 @@ router.get('/:searchitem', (req, res) => {
    })
 })
 
+router.post('/', (req, res) => {
+    const newFavorite = req.body
+    console.log('our favorite picture', newFavorite)
+    const queryText = `INSERT INTO "favorites" ("src")
+    VALUES ($1)`;
+
+    const favoriteValue = [newFavorite.src];
+
+    pool.query(queryText, favoriteValue)
+    .then(() => {
+        res.sendStatus(200)
+    }).catch((error) => {
+        console.log('error in out router dot post search', error)
+        res.sendStatus(500)
+    })
+})
+
 
 module.exports = router;

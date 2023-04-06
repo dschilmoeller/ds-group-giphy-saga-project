@@ -18,6 +18,16 @@ function Search() {
         });
     }
 
+    function addFavorite (event) {
+        console.log('inside addFavorite function')
+        console.log('here is our favorite event', event.target.id)
+        let imageToFavorite = {src: results[event.target.id].embed_url}
+        dispatch({
+            type: 'POST_FAVORITE',
+            payload: imageToFavorite
+        })
+    }
+
     function handleSearchString(event) {
         // console.log('This is what I am seraching',event.target.value)
         setSearchString(event.target.value)
@@ -35,17 +45,25 @@ function Search() {
     } else {
         return (
             <>
-        { console.log('results is:', results) }
-        {results.map((image, i) => {
-                console.log('Here is our map', image)
-                return (
-                    <div key={i}>
-                        <iframe src={image.embed_url} />
-                    </div>
-                )
-            })
-        }
-   </> )}
+                <div>
+                    <form onSubmit={searchImages}>
+                        <input placeholder="Search" onChange={handleSearchString} />
+                        <button type='submit'>Search</button>
+                    </form>
+                </div>
+                {console.log('results is:', results)}
+                {results.map((image, i) => {
+                    console.log('Here is our map', image)
+                    return (
+                        <div key={i}>
+                            <iframe src={image.embed_url} />
+                            <button id={i} onClick={addFavorite}>Favorite</button>
+                        </div>
+                    )
+                })
+                }
+            </>)
+    }
 }
 
-    export default Search;
+export default Search;
