@@ -1,11 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-function Search () {
+// put <SearchList /> inside a conditional activated by hitting the search button. Simple false->true
+
+function Search() {
     const dispatch = useDispatch();
     const [searchString, setSearchString] = useState('')
+    const results = useSelector(store => store.searchReducer)
+    // console.log('results.data:', results.data.images.original.url)
 
-    function searchImages (event) {
+    function searchImages(event) {
         event.preventDefault()
         console.log('inside searchImages');
         dispatch({
@@ -14,20 +18,34 @@ function Search () {
         });
     }
 
-    function handleSearchString (event) {
-        console.log('This is what I am seraching',event.target.value)
+    function handleSearchString(event) {
+        // console.log('This is what I am seraching',event.target.value)
         setSearchString(event.target.value)
     }
 
-
-
-
-    return (<>
-    <form onSubmit={searchImages}>
-        <input placeholder="Search" onChange={handleSearchString}/>
-        <button type='submit'>Search</button>
-    </form>
-    </>)
+    if (results.data === 'null') {
+        return (
+            <div>
+                <form onSubmit={searchImages}>
+                    <input placeholder="Search" onChange={handleSearchString} />
+                    <button type='submit'>Search</button>
+                </form>
+            </div>
+        )
+    } else {
+        return (
+            <>
+        { console.log('results is:', results) }
+        {results.map((image, i) => {
+                console.log('Here is our map', image)
+                return (
+                    <div key={i}>
+                        <iframe src={image.embed_url} />
+                    </div>
+                )
+            })
+        }
+   </> )}
 }
 
-export default Search;
+    export default Search;

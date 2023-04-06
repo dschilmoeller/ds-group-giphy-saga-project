@@ -8,10 +8,12 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios'
 
-const searchReducer = (state = [], action) => {
+// default state is bad.
+const searchReducer = (state = {data: 'null'}, action) => {
     switch (action.type) {
         case 'SET_IMAGES':
-            return action.payload;
+             console.log('Inside SET_IMAGES, payload is:', action.payload.data)
+            return action.payload.data;
         default: 
         return state;
     }
