@@ -1,6 +1,9 @@
 import React from "react"
+import { useDispatch, useSelector } from 'react-redux';
+
 
 function FavGif(props) {
+    // declare disp
     return (<><div className="gifContainer">
         <img src={props.favGif.src} />
         <select>
@@ -12,6 +15,7 @@ function FavGif(props) {
             <option value="5">Meme</option>
             
         </select>
+        <button>Set Category</button>
     </div>
     </>)
 }
