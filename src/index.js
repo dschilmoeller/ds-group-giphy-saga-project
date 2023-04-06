@@ -8,7 +8,7 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios'
 
-const searchReducer = (state = [], action) {
+const searchReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_IMAGES':
             return action.payload;
@@ -17,8 +17,21 @@ const searchReducer = (state = [], action) {
     }
 }
 
+function* getSearchResults (action) {
+    console.log('inside my getSearchResults', action)
+    console.log('here is my payload', action.payload)
+    try {
+        const searchResponse = yield axios.get(`/api/search/${action.payload}`)
+        yield put({type: 'SET_IMAGES', payload: searchResponse.data})
+    } catch (error) {
+        console.log('error in getSearchResults', error)
+    }
+
+}
+
 function* mainSaga () {
-    // sagas here dude
+    // sagas go here
+    yield takeEvery('SEARCH_IMAGES', getSearchResults)
 }
 
 const sagaMiddleware = createSagaMiddleware();
@@ -26,6 +39,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore (
     combineReducers({
         //reducers goes here
+        searchReducer,
     }),
     applyMiddleware(sagaMiddleware, logger)
 )
