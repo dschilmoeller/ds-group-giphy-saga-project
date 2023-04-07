@@ -1,5 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 // put <SearchList /> inside a conditional activated by hitting the search button. Simple false->true
 
@@ -16,6 +23,7 @@ function Search() {
             type: 'SEARCH_IMAGES',
             payload: searchString
         });
+        setSearchString('')
     }
 
     function addFavorite(event) {
@@ -37,8 +45,8 @@ function Search() {
         return (
             <div>
                 <form onSubmit={searchImages}>
-                    <input placeholder="Search" onChange={handleSearchString} />
-                    <button type='submit'>Search</button>
+                    <TextField id="outlined-basic" label='search' variant="outlined" onChange={handleSearchString} value={searchString}/>
+                    <Button type='submit' style={{'backgroundColor': 'aquamarine'}}>Search</Button>
                 </form>
             </div>
         )
@@ -47,24 +55,28 @@ function Search() {
             <>
                 <div>
                     <form onSubmit={searchImages}>
-                        <input placeholder="Search" onChange={handleSearchString} />
-                        <button type='submit'>Search</button>
+                        <TextField id="outlined-basic" label='search' variant="outlined" onChange={handleSearchString} value={searchString}/>
+                        <Button type='submit' style={{'backgroundColor': 'aquamarine'}}>Search</Button>
                     </form>
                 </div>
                 {console.log('results is:', results)}
-                <div className="gifWrapper">
-                    {results.map((image, i) => {
-                        //console.log('Here is our map', image)
-                        return (
-                            <div className="singleGif" key={i}>
+                <Card sx={{ minWidth: 275 }} style={{'backgroundColor': 'transparent'}}>
+                    <div className="gifWrapper">
+                        {results.map((image, i, x) => {
+                            //console.log('Here is our map', image)
+                            return (<>
+                            <CardContent>
+                            <div className="singleGif">
                                 <iframe src={image.embed_url} />
-                                <div className="favoriteBtn">
-                                    <button id={i} onClick={addFavorite}>Favorite</button>
-                                </div>
+                                <CardActions style={{'backgroundColor': 'skyblue'}}>
+                                    <Button variant="contained" color='success' size="small" id={i} onClick={addFavorite}>Favorite</Button>
+                                </CardActions>
                             </div>
-                        )
+                            </CardContent>
+                            </> )
                     })
                     }</div>
+            </Card>
             </>)
     }
 }

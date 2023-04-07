@@ -1,3 +1,6 @@
+body {
+    background-image: linear-gradient(red, yellow, green);
+}
 .gifWrapper {
     display: flex;
     flex-wrap: wrap;
@@ -5,14 +8,12 @@
 }
 
 .singleGif {
-    border: 5px solid purple;
+    border: .5rem solid purple;
+    box-shadow: 5px 5px;
+    border-radius: 10px;
 }
 
-.favoriteBtn {
-    display: flex;
-    justify-content: center;
-    background-color: aquamarine;
-}
+
 button {
     background-color: yellow;
     border-radius: 7px;
