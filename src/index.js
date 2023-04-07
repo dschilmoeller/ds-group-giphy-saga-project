@@ -12,9 +12,20 @@ import axios from "axios";
 function* mainSaga() {
   // sagas here dude
   yield takeEvery("GET_FAVORITES", getFavorites);
+  yield takeEvery('UPDATE_FAV_GIF', updateCategory)
 }
 
 // SAGAS
+function* updateCategory(action) {
+    console.log('updateCategory saga action.payload:', action.payload);
+    // PUT request to change category
+    try{
+        yield axios.put(`api/favorite/${action.payload.id}/${action.payload.category_id}`);
+    }catch(err){
+        console.log('err sending PUT data to server', err);
+    }
+    
+}
 function* getFavorites() {
   try {
     // HTTP call to server to return favorite DB results
