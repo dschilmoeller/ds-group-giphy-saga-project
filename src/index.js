@@ -42,6 +42,9 @@ function* postFavorite(action) {
 }
 
 function* mainSaga() {
+  // sagas here dude
+  yield takeEvery("GET_FAVORITES", getFavorites);
+  yield takeEvery('UPDATE_FAV_GIF', updateCategory)
     // sagas go here
     yield takeEvery('SEARCH_IMAGES', getSearchResults);
     yield takeEvery('POST_FAVORITE', postFavorite);
@@ -49,6 +52,19 @@ function* mainSaga() {
 }
 
 // SAGAS
+function* updateCategory(action) {
+    console.log('updateCategory saga action.payload:', action.payload);
+    // PUT request to change category
+    try{
+        yield axios.put(`api/favorite/${action.payload.id}/${action.payload.category_id}`);
+        yield put({
+            type: 'GET_FAVORITES'
+        })
+    }catch(err){
+        console.log('err sending PUT data to server', err);
+    }
+    
+}
 function* getFavorites() {
   try {
     // HTTP call to server to return favorite DB results
