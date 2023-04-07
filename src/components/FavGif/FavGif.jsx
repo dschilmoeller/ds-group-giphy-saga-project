@@ -17,6 +17,7 @@ function FavGif(props) {
     }
     return (<><div className="gifContainer">
         <img src={props.favGif.src} />
+        <h3>{props.favGif.name}</h3>
         <select name='Category' value={category} onChange= {handleSelect}>
             <option defaultValue>Category</option>
             <option value="1">Funny</option>

@@ -21,6 +21,9 @@ function* updateCategory(action) {
     // PUT request to change category
     try{
         yield axios.put(`api/favorite/${action.payload.id}/${action.payload.category_id}`);
+        yield put({
+            type: 'GET_FAVORITES'
+        })
     }catch(err){
         console.log('err sending PUT data to server', err);
     }

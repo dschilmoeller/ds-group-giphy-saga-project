@@ -5,10 +5,10 @@ const router = express.Router();
 
 // return all favorite images
 router.get("/", (req, res) => {
-  const queryText = `SELECT favorites.id, src, name
+  const queryText = `SELECT favorites.id, src, name, category_id
   FROM favorites
   LEFT OUTER JOIN category ON favorites.category_id = category.id
-  ORDER BY id ASC`;
+  ORDER BY category_id`;
 
   pool
     .query(queryText)
