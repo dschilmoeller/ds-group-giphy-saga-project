@@ -1,0 +1,1 @@
+readme - mention need to add users own api key from giphy to .dotenv situation.

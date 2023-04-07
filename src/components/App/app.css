@@ -1,0 +1,20 @@
+body {
+    background-image: linear-gradient(red, yellow, green);
+}
+.gifWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.singleGif {
+    border: .5rem solid purple;
+    box-shadow: 5px 5px;
+    border-radius: 10px;
+}
+
+
+button {
+    background-color: yellow;
+    border-radius: 7px;
+}
