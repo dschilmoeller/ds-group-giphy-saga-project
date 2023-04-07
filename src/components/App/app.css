@@ -1,0 +1,19 @@
+.gifWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.singleGif {
+    border: 5px solid purple;
+}
+
+.favoriteBtn {
+    display: flex;
+    justify-content: center;
+    background-color: aquamarine;
+}
+button {
+    background-color: yellow;
+    border-radius: 7px;
+}

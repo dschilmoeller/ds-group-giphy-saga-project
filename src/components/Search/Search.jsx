@@ -18,10 +18,10 @@ function Search() {
         });
     }
 
-    function addFavorite (event) {
+    function addFavorite(event) {
         //console.log('inside addFavorite function')
         //console.log('here is our favorite event', event.target.id)
-        let imageToFavorite = {src: results[event.target.id].embed_url}
+        let imageToFavorite = { src: results[event.target.id].embed_url }
         dispatch({
             type: 'POST_FAVORITE',
             payload: imageToFavorite
@@ -52,16 +52,19 @@ function Search() {
                     </form>
                 </div>
                 {console.log('results is:', results)}
-                {results.map((image, i) => {
-                    //console.log('Here is our map', image)
-                    return (
-                        <div key={i}>
-                            <iframe src={image.embed_url} />
-                            <button id={i} onClick={addFavorite}>Favorite</button>
-                        </div>
-                    )
-                })
-                }
+                <div className="gifWrapper">
+                    {results.map((image, i) => {
+                        //console.log('Here is our map', image)
+                        return (
+                            <div className="singleGif" key={i}>
+                                <iframe src={image.embed_url} />
+                                <div className="favoriteBtn">
+                                    <button id={i} onClick={addFavorite}>Favorite</button>
+                                </div>
+                            </div>
+                        )
+                    })
+                    }</div>
             </>)
     }
 }
